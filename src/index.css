@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+canvas{
+  /* width: 3000px!important; */
+  height: 2000px!important;
+}
+.infomation_game{
+  font-size: 20px;
+  text-align: left;
+  padding: 20px;
+  background-color: #000;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+.infomation_game span{
+  color: rgb(231, 96, 6);
+  font-weight: bold;
+}
