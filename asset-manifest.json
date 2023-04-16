@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/mrhoc/crash_react/static/css/main.9106da22.css",
-    "main.js": "/mrhoc/crash_react/static/js/main.777e6be4.js",
-    "static/js/787.28cb0dcd.chunk.js": "/mrhoc/crash_react/static/js/787.28cb0dcd.chunk.js",
-    "index.html": "/mrhoc/crash_react/index.html",
-    "main.9106da22.css.map": "/mrhoc/crash_react/static/css/main.9106da22.css.map",
-    "main.777e6be4.js.map": "/mrhoc/crash_react/static/js/main.777e6be4.js.map",
-    "787.28cb0dcd.chunk.js.map": "/mrhoc/crash_react/static/js/787.28cb0dcd.chunk.js.map"
+    "main.css": "/crash_react/static/css/main.9106da22.css",
+    "main.js": "/crash_react/static/js/main.234d8769.js",
+    "static/js/787.28cb0dcd.chunk.js": "/crash_react/static/js/787.28cb0dcd.chunk.js",
+    "index.html": "/crash_react/index.html",
+    "main.9106da22.css.map": "/crash_react/static/css/main.9106da22.css.map",
+    "main.234d8769.js.map": "/crash_react/static/js/main.234d8769.js.map",
+    "787.28cb0dcd.chunk.js.map": "/crash_react/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9106da22.css",
-    "static/js/main.777e6be4.js"
+    "static/js/main.234d8769.js"
   ]
 }
