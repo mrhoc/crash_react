@@ -9,6 +9,8 @@ import axios from 'axios';
 
 function App() {
   const [hash, setHash] = useState([])
+  const [numberChart, setNumberChart] = useState(true)
+
   var config = {
     method: 'get',
     url: '/api/crash/result/recent/',
@@ -24,11 +26,15 @@ function App() {
         console.log(error);
       });
 
-  }, [])
+  }, [numberChart])
+
+  const handleClick=(b)=>{
+    setNumberChart(b)
+  }
 
   const saltV1 = '000000000000000000030587dd9ded1fcc5d603652da58deb670319bd2e09445';
   let curHash = hash.hash;
-  const issueNumber = +hash.gameId - 5870139;
+  const issueNumber = numberChart?(+hash.gameId - 5870139):2800;
   let arr = [];
 
   const gameResult = (seed, salt) => {
@@ -133,9 +139,10 @@ function App() {
   return (
     <div className="App">
       <div className='infomation_game'>
-        <div style={{ minWidth: '100px',display:'inline-block' }}>GameId: </div> from <span>5870139</span> to <span>{hash.gameId}</span><br />
+        <div style={{ minWidth: '100px',display:'inline-block' }}>GameId: </div> from <span>5870139</span> to <span>{hash.gameId}</span> <button onClick={()=>{handleClick(true)}}>View Chart Bet(default)</button><button onClick={()=>{handleClick(false)}}>View Chart 2k5 Bet</button><br />
         <div style={{ minWidth: '100px',display:'inline-block' }}> Total Bet:</div> <span>{issueNumber}</span><br />
         <div style={{ minWidth: '100px',display:'inline-block' }}>Total</div> ( Green - red ): <span>{totals[totals.length - 1]}</span>
+        
       </div>
       <Line data={data} options={options} />
 

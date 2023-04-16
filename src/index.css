@@ -29,3 +29,21 @@ canvas{
   color: rgb(231, 96, 6);
   font-weight: bold;
 }
+.infomation_game button{
+  cursor: pointer;
+  height: 30px;
+  width: 200px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+ 
+  border: 1px solid;
+  border-color: #e76657;
+  background: #fff;
+  color: #000;
+  margin: 0px 10px;
+}
+.infomation_game button{
+  /* background: #e76657 ; */
+  /* color: #fff; */
+}
