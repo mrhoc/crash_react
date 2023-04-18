@@ -5,9 +5,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import Chart from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
 import axios from 'axios';
+import 'chartjs-plugin-zoom';
 
-
-const btns=[10000,5000,2500,1500,1000,500]
+const btns=[10000,5000,2500,1500,1000,500,300]
 
 function App() {
   const [hash, setHash] = useState([])
@@ -44,7 +44,7 @@ function App() {
 
   const saltV1 = '000000000000000000030587dd9ded1fcc5d603652da58deb670319bd2e09445';
   let curHash = hash.hash;
-  const issueNumber = numberChart?(+hash.gameId - 5870139 -11000):bet; //reset 0 =11000(5881835)
+  const issueNumber = numberChart?(+hash.gameId - 5870139 - 11000):bet; //reset 0 =11000(5881835)
   let arr = [];
 
   const gameResult = (seed, salt) => {
@@ -124,8 +124,8 @@ function App() {
 
   // Vẽ biểu đồ
   let BetTruth=[]
-  for(let i=0;i<=20;i++){
-    BetTruth.push(11270+300*i)
+  for(let i=1;i<=20;i++){
+    BetTruth.push(270  + 300*i)
   }
   console.log('BetTruth',BetTruth);
   const data = {
