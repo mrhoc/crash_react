@@ -4,8 +4,10 @@ import CryptoJS from 'crypto-js';
 import React, { useEffect, useRef, useState } from 'react';
 import Chart from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
-
 import axios from 'axios';
+
+
+const btns=[10000,5000,2500,1500,1000,500]
 
 function App() {
   const [hash, setHash] = useState([])
@@ -20,23 +22,29 @@ function App() {
   useEffect(() => {
     axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data.data));
         setHash(response.data.data[0])
       })
       .catch(function (error) {
         console.log(error);
       });
 
-  }, [numberChart,bet])
+  }, [numberChart])
 
   const handleClick=(b,num)=>{
     setNumberChart(b);
    !numberChart&&setBet(num);
   }
 
+  const renderBtn=()=>{
+    return btns.map((btn)=>{
+      return  <><button onClick={()=>{handleClick(false,btn)}}>View Chart {btn} Bet</button></>
+    })
+  }
+
+
   const saltV1 = '000000000000000000030587dd9ded1fcc5d603652da58deb670319bd2e09445';
   let curHash = hash.hash;
-  const issueNumber = numberChart?(+hash.gameId - 5870139):bet;
+  const issueNumber = numberChart?(+hash.gameId - 5870139 -11000):bet; //reset 0 =11000(5881835)
   let arr = [];
 
   const gameResult = (seed, salt) => {
@@ -85,9 +93,6 @@ function App() {
   arr = genHash(curHash).slice().reverse();
   let len = arr.length;
 
-  console.log('hash:', hash)
-  console.log('data:', arr)
-
   let total = 0;
   let totals = [];
 
@@ -118,11 +123,16 @@ function App() {
   }
 
   // Vẽ biểu đồ
+  let BetTruth=[]
+  for(let i=0;i<=20;i++){
+    BetTruth.push(11270+300*i)
+  }
+  console.log('BetTruth',BetTruth);
   const data = {
     labels: [...Array(len).keys()],
     datasets: [
       {
-        label: 'Chart Crash',
+        label: 'Chart Crash (11270 + 300*n)',
         data: totals,
         borderColor: colors,
         borderWidth: 1,
@@ -135,22 +145,15 @@ function App() {
     maintainAspectRatio: false
   };
 
-
-
-
   return (
     <div className="App">
       <div className='infomation_game'>
-        <div style={{ minWidth: '100px',display:'inline-block' }}>GameId: </div> from <span>5870139</span> to <span>{hash.gameId}</span> 
-        <button onClick={()=>{handleClick(true)}}>View Chart Bet(default)</button>
-        <button onClick={()=>{handleClick(false,2500)}}>View Chart 2500 Bet</button>
-        <button onClick={()=>{handleClick(false,1500)}}>View Chart 1500 Bet</button>
-        <button onClick={()=>{handleClick(false,1000)}}>View Chart 1000 Bet</button>
-        <button onClick={()=>{handleClick(false,500)}}>View Chart 500 Bet</button><br />
-
+        <div style={{ minWidth: '100px',display:'inline-block' }}>GameId: </div> from <span>5870139</span> to <span>{hash.gameId}</span> <br/>
         <div style={{ minWidth: '100px',display:'inline-block' }}> Total Bet:</div> <span>{issueNumber}</span><br />
-        <div style={{ minWidth: '100px',display:'inline-block' }}>Total</div> ( Green - red ): <span>{totals[totals.length - 1]}</span>
         
+        <div style={{ minWidth: '100px',display:'inline-block' }}>Total( Green - red ): </div> <span>{totals[totals.length - 1]}</span><br></br>
+        <button onClick={()=>{handleClick(true)}}>View Chart Bet(default)</button>
+        {renderBtn()}
       </div>
       <Line data={data} options={options} />
 
