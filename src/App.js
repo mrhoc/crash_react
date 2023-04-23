@@ -44,7 +44,7 @@ function App() {
 
   const saltV1 = '000000000000000000030587dd9ded1fcc5d603652da58deb670319bd2e09445';
   let curHash = hash.hash;
-  const issueNumber = numberChart?(+hash.gameId - 5870139 - 11000 - 5409):bet; //reset 0 =11000(5881835)
+  const issueNumber = numberChart?(+hash.gameId - 5870139 - 11000 - 5409 - 3159):bet; //reset 0 =11000(5881835)
   let arr = [];
 
   const gameResult = (seed, salt) => {
