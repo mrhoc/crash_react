@@ -7,7 +7,7 @@ import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import 'chartjs-plugin-zoom';
 
-const btns = [10000, 5000, 2500, 1500, 1000, 500, 300]
+const btns = [25000,20000,10000, 5000, 2500, 1500, 1000, 500, 300]
 
 function App() {
   const [hash, setHash] = useState([])
@@ -42,9 +42,9 @@ function App() {
   }
 
 
-  const saltV1 = '000000000000000000030587dd9ded1fcc5d603652da58deb670319bd2e09445';
+  const saltV1 = '0000000000000000000301e2801a9a9598bfb114e574a91a887f2132f33047e6';
   let curHash = hash.hash;
-  const issueNumber = numberChart ? (+hash.gameId - 5870139 - 11000 - 5407 - 3161) : bet; //reset 0 =11000(5881835)
+  const issueNumber = numberChart ? (+hash.gameId - 6150000) : bet; //reset 0 =11000(5881835)
 
   let arr = [];
 
@@ -149,7 +149,7 @@ function App() {
   return (
     <div className="App">
       <div className='infomation_game'>
-        <div style={{ minWidth: '100px', display: 'inline-block' }}>GameId: </div> from <span>5870139</span> to <span>{hash.gameId}</span> <br />
+        <div style={{ minWidth: '100px', display: 'inline-block' }}>GameId: </div> from <span>6150000</span> to <span>{hash.gameId}</span> <br />
         <div style={{ minWidth: '100px', display: 'inline-block' }}> Total Bet:</div> <span>{issueNumber}</span><br />
 
         <div style={{ minWidth: '100px', display: 'inline-block' }}>Total( Green - red ): </div> <span>{totals[totals.length - 1]}</span><br></br>
