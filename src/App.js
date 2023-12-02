@@ -7,7 +7,7 @@ import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import 'chartjs-plugin-zoom';
 
-const btns = [25000,20000,10000, 5000, 2500, 1500, 1000, 500, 300]
+const btns=[10000,5000,2500,1500,1000,500,300]
 
 function App() {
   const [hash, setHash] = useState([])
@@ -30,22 +30,21 @@ function App() {
 
   }, [numberChart,bet])
 
-  const handleClick = (b, num) => {
+  const handleClick=(b,num)=>{
     setNumberChart(b);
-    !numberChart && setBet(num);
+   !numberChart&&setBet(num);
   }
 
-  const renderBtn = () => {
-    return btns.map((btn) => {
-      return <><button onClick={() => { handleClick(false, btn) }}>View Chart {btn} Bet</button></>
+  const renderBtn=()=>{
+    return btns.map((btn)=>{
+      return  <><button onClick={()=>{handleClick(false,btn)}}>View Chart {btn} Bet</button></>
     })
   }
 
 
   const saltV1 = '0000000000000000000301e2801a9a9598bfb114e574a91a887f2132f33047e6';
   let curHash = hash.hash;
-  const issueNumber = numberChart ? (+hash.gameId - 6150000) : bet; //reset 0 =11000(5881835)
-
+  const issueNumber = numberChart?(500):bet; //reset 0 =11000(5881835)
   let arr = [];
 
   const gameResult = (seed, salt) => {
@@ -124,16 +123,16 @@ function App() {
   }
 
   // Vẽ biểu đồ
-  let BetTruth = []
-  for (let i = 1; i <= 20; i++) {
-    BetTruth.push(270 + 300 * i)
+  let BetTruth=[]
+  for(let i=1;i<=20;i++){
+    BetTruth.push(270  + 300*i)
   }
-  console.log('BetTruth', BetTruth);
+  console.log('BetTruth',BetTruth);
   const data = {
     labels: [...Array(len).keys()],
     datasets: [
       {
-        label: 'Chart Crash (11270 + 300*n) diff:50 game + 300 van game tu dinh?',
+        label: 'Chart Crash (11270 + 300*n)',
         data: totals,
         borderColor: colors,
         borderWidth: 1,
@@ -149,11 +148,11 @@ function App() {
   return (
     <div className="App">
       <div className='infomation_game'>
-        <div style={{ minWidth: '100px', display: 'inline-block' }}>GameId: </div> from <span>6150000</span> to <span>{hash.gameId}</span> <br />
-        <div style={{ minWidth: '100px', display: 'inline-block' }}> Total Bet:</div> <span>{issueNumber}</span><br />
-
-        <div style={{ minWidth: '100px', display: 'inline-block' }}>Total( Green - red ): </div> <span>{totals[totals.length - 1]}</span><br></br>
-        <button onClick={() => { handleClick(true) }}>View Chart Bet(default)</button>
+        <div style={{ minWidth: '100px',display:'inline-block' }}>GameId: </div> from <span>5870139</span> to <span>{hash.gameId}</span> <br/>
+        <div style={{ minWidth: '100px',display:'inline-block' }}> Total Bet:</div> <span>{issueNumber}</span><br />
+        
+        <div style={{ minWidth: '100px',display:'inline-block' }}>Total( Green - red ): </div> <span>{totals[totals.length - 1]}</span><br></br>
+        <button onClick={()=>{handleClick(true)}}>View Chart Bet(default)</button>
         {renderBtn()}
       </div>
       <Line data={data} options={options} />
