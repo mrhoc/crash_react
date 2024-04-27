@@ -7,28 +7,13 @@ import { Line } from 'react-chartjs-2';
 import axios from 'axios';
 import 'chartjs-plugin-zoom';
 
-const btns=[10000,5000,2500,1500,1000,500,300]
+const btns=[30000,10000,5000,2500,1500,1000,500,300,100]
 
 function App() {
   const [hash, setHash] = useState([])
   const [numberChart, setNumberChart] = useState(true)
   const [bet, setBet] = useState(500)
 
-  var config = {
-    method: 'get',
-    url: '/api/crash/result/recent/',
-  };
-
-  useEffect(() => {
-    axios(config)
-      .then(function (response) {
-        setHash(response.data.data[0])
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-  }, [numberChart,bet])
 
   const handleClick=(b,num)=>{
     setNumberChart(b);
@@ -37,13 +22,18 @@ function App() {
 
   const renderBtn=()=>{
     return btns.map((btn)=>{
-      return  <><button onClick={()=>{handleClick(false,btn)}}>View Chart {btn} Bet</button></>
+      return  <><button style={{marginBottom:'5px'}} onClick={()=>{handleClick(false,btn)}}>View Chart {btn} Bet</button></>
     })
   }
 
+  useEffect(() => {
+    
+
+  }, [numberChart,bet])
+
 
   const saltV1 = '0000000000000000000301e2801a9a9598bfb114e574a91a887f2132f33047e6';
-  let curHash = hash.hash;
+  let curHash = hash;
   const issueNumber = numberChart?(500):bet; //reset 0 =11000(5881835)
   let arr = [];
 
@@ -97,7 +87,7 @@ function App() {
   let totals = [];
 
   arr.forEach(function (item) {
-    if (item >= 2) {
+    if (item >= 2 ){
       total += 1;
     } else {
       total -= 1;
@@ -105,7 +95,7 @@ function App() {
     totals.push(total);
   });
 
-
+  console.log(total)
 
   // Tạo mảng màu cho biểu đồ
   let colors = [];
@@ -140,6 +130,8 @@ function App() {
     ]
   };
 
+  console.log({hash})
+
   const options = {
     responsive: true,
     maintainAspectRatio: false
@@ -148,9 +140,10 @@ function App() {
   return (
     <div className="App">
       <div className='infomation_game'>
-        <div style={{ minWidth: '100px',display:'inline-block' }}>GameId: </div> from <span>5870139</span> to <span>{hash.gameId}</span> <br/>
-        <div style={{ minWidth: '100px',display:'inline-block' }}> Total Bet:</div> <span>{issueNumber}</span><br />
-        
+        <div>
+          Enter Hash: <input placeholder='hash' onChange={(e)=>{setHash(e.target.value)}} style={{border: '2px solid #000',marginLeft:'20px',padding:'5px 10px',width:'1000px'}} />
+        </div>
+        <div  style={{ minWidth: '100px',display:'inline-block'}}> Total Bet:</div> <span>{issueNumber}</span><br />
         <div style={{ minWidth: '100px',display:'inline-block' }}>Total( Green - red ): </div> <span>{totals[totals.length - 1]}</span><br></br>
         <button onClick={()=>{handleClick(true)}}>View Chart Bet(default)</button>
         {renderBtn()}
