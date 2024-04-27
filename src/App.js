@@ -10,7 +10,7 @@ import 'chartjs-plugin-zoom';
 const btns=[30000,10000,5000,2500,1500,1000,500,300,100]
 
 function App() {
-  const [hash, setHash] = useState('a2a4e94c0c135aaf6f70986f7270cf7e21856eec31cc2ff15e53b0343e80b329')
+  const [hash, setHash] = useState([])
   const [numberChart, setNumberChart] = useState(true)
   const [bet, setBet] = useState(500)
 
