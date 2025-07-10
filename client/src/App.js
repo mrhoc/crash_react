@@ -27,9 +27,16 @@ function App() {
   }
 
   useEffect(() => {
-    
-
-  }, [numberChart,bet])
+    console.log('useEffect called with bet:', bet);
+  axios.get('/api/bcgame/crash-history')
+      .then(res => {
+        console.log('Crash History Data:', res.data);
+        if (res.data.success) {
+          setHash(res.data.data[0][2]);
+        }
+      })
+      .catch(err => console.error(err));
+}, [bet]);
 
 
   const saltV1 = '0000000000000000000301e2801a9a9598bfb114e574a91a887f2132f33047e6';
@@ -113,11 +120,7 @@ function App() {
   }
 
   // Vẽ biểu đồ
-  let BetTruth=[]
-  for(let i=1;i<=20;i++){
-    BetTruth.push(270  + 300*i)
-  }
-  console.log('BetTruth',BetTruth);
+
   const data = {
     labels: [...Array(len).keys()],
     datasets: [
