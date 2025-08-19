@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+# Crash Game Trend Analysis & Prediction
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Ứng dụng React để phân tích xu hướng và dự đoán kết quả của game Crash dựa trên mã hash.
 
-## Available Scripts
+## Tính năng chính
 
-In the project directory, you can run:
+### 1. Phân tích xu hướng hiện tại
+- Nhập mã hash vào input để xem đồ thị xu hướng
+- Hiển thị đồ thị cho các mức bet: 100, 300, 500, 1000, 1500, 2500, 5000, 10000, 30000
+- Tính toán điểm số tích lũy (xanh = thắng, đỏ = thua)
+- Phân tích xu hướng với các chỉ số:
+  - **Trend**: Xu hướng (Upward/Downward/Sideways)
+  - **Change**: Thay đổi điểm số
+  - **Volatility**: Độ biến động
+  - **Confidence**: Độ tin cậy dự đoán
 
-### `npm start`
+### 2. Dự đoán xu hướng tương lai
+- Dự đoán xu hướng cho 1000 bet tiếp theo (có thể thay đổi)
+- Hiển thị đồ thị dự đoán riêng biệt
+- Sử dụng thuật toán game để tính toán kết quả
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 3. Giao diện người dùng
+- Thiết kế responsive và hiện đại
+- Hỗ trợ zoom và pan trên biểu đồ
+- Màu sắc trực quan (xanh = tăng, đỏ = giảm)
+- Animation và hiệu ứng mượt mà
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Cách sử dụng
 
-### `npm test`
+### Bước 1: Nhập mã hash
+- Nhập mã hash vào ô input "Enter Hash"
+- Mã hash sẽ được sử dụng làm điểm bắt đầu cho thuật toán
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Bước 2: Chọn số lượng bet
+- Sử dụng các nút để chọn số lượng bet muốn xem
+- Mặc định là 500 bet
+- Có thể chọn từ 100 đến 30000 bet
 
-### `npm run build`
+### Bước 3: Xem phân tích xu hướng
+- Đồ thị hiện tại sẽ hiển thị xu hướng của các bet đã chọn
+- Phần "Trend Analysis" sẽ hiển thị các chỉ số phân tích
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Bước 4: Xem dự đoán
+- Nhập số lượng bet muốn dự đoán
+- Nhấn "Show Prediction" để hiển thị đồ thị dự đoán
+- Đồ thị dự đoán sẽ hiển thị xu hướng cho các bet tiếp theo
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Thuật toán
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Ứng dụng sử dụng thuật toán tương tự như game Crash:
 
-### `npm run eject`
+1. **HMAC-SHA256**: Sử dụng salt cố định để tạo seed
+2. **Random Generation**: Chuyển đổi seed thành số ngẫu nhiên
+3. **Game Logic**: Tính toán kết quả crash (>=2 = thắng, <2 = thua)
+4. **Hash Chain**: Mỗi bet sử dụng hash của bet trước đó
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Cài đặt và chạy
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+# Cài đặt dependencies
+npm install
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+# Chạy ứng dụng
+npm start
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+# Build cho production
+npm run build
+```
 
-## Learn More
+## Dependencies
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **React**: Framework UI
+- **Chart.js**: Thư viện vẽ biểu đồ
+- **react-chartjs-2**: Wrapper React cho Chart.js
+- **crypto-js**: Thư viện mã hóa
+- **axios**: HTTP client
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Lưu ý
 
-### Code Splitting
+- Dự đoán chỉ mang tính chất tham khảo
+- Kết quả thực tế có thể khác với dự đoán
+- Sử dụng thông tin này một cách có trách nhiệm
+- Không đảm bảo lợi nhuận từ việc sử dụng ứng dụng
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Cải tiến tương lai
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Thêm nhiều thuật toán dự đoán
+- Lưu trữ lịch sử dự đoán
+- Thêm thông báo khi có xu hướng đặc biệt
+- Tích hợp với API game thực tế
+- Thêm biểu đồ thống kê chi tiết
