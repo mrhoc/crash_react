@@ -172,6 +172,33 @@ canvas{
   margin-left: 4px;
 }
 
+.infomation_game .clear-btn{
+  cursor: pointer;
+  height: 28px;
+  width: auto;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #e76657;
+  border-radius: 6px;
+  background: transparent;
+  color: #e76657;
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: inherit;
+  margin: 0;
+  transition: all 0.15s ease;
+}
+
+.infomation_game .clear-btn:hover{
+  background: #e76657;
+  color: #fff;
+}
+
+.infomation_game .clear-btn:active{
+  transform: translateY(-1px);
+}
+
 .App{
   margin-top: 96px;
 }

@@ -1,7 +1,7 @@
 
 import './App.css';
 import CryptoJS from 'crypto-js';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
 
@@ -9,11 +9,58 @@ const btns=[30000,10000,5000,2500,1500,1000,500,300,100]
 
 const DEFAULT_SALT = '000000000000000000010283162e089cc99f643ee5043141412e839945afe2f9';
 
+const STORAGE_KEY = 'crash_react_state';
+
+// Đọc state đã lưu từ localStorage (fallback về giá trị mặc định)
+let cachedState = null;
+let cacheLoaded = false;
+
+const loadState = () => {
+  if (cacheLoaded) return cachedState;
+  cacheLoaded = true;
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === 'object') {
+        cachedState = parsed;
+      }
+    }
+  } catch (e) {
+    cachedState = null;
+  }
+  return cachedState;
+};
+
 function App() {
-  const [hash, setHash] = useState('')
-  const [numberChart, setNumberChart] = useState(true)
-  const [bet, setBet] = useState(500)
-  const [saltV1, setSaltV1] = useState(DEFAULT_SALT)
+  const [hash, setHash] = useState(() => loadState()?.hash ?? '')
+  const [numberChart, setNumberChart] = useState(() => loadState()?.numberChart ?? true)
+  const [bet, setBet] = useState(() => loadState()?.bet ?? 500)
+  const [saltV1, setSaltV1] = useState(() => loadState()?.saltV1 ?? DEFAULT_SALT)
+
+  // Lưu mỗi khi có thay đổi
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({ hash, numberChart, bet, saltV1 })
+      );
+    } catch (e) {
+      /* localStorage bị chặn (private mode) -> bỏ qua */
+    }
+  }, [hash, numberChart, bet, saltV1]);
+
+  const clearSaved = () => {
+    try {
+      window.localStorage.removeItem(STORAGE_KEY);
+    } catch (e) {
+      /* ignore */
+    }
+    setHash('');
+    setSaltV1(DEFAULT_SALT);
+    setBet(500);
+    setNumberChart(true);
+  }
 
 
   const handleClick=(b,num)=>{
@@ -172,6 +219,9 @@ function App() {
               <span className="stat-chip">
                 Green − Red: <b>{totals[totals.length - 1]}</b>
               </span>
+              <button type="button" className="clear-btn" onClick={clearSaved}>
+                Xóa đã lưu
+              </button>
             </div>
           </div>
         </div>
