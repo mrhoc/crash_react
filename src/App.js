@@ -1,18 +1,16 @@
 
 import './App.css';
 import CryptoJS from 'crypto-js';
-import React, { useEffect, useRef, useState } from 'react';
-import Chart from 'chart.js/auto';
+import React, { useState } from 'react';
+import 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
-import axios from 'axios';
-import 'chartjs-plugin-zoom';
 
 const btns=[30000,10000,5000,2500,1500,1000,500,300,100]
 
 const DEFAULT_SALT = '000000000000000000010283162e089cc99f643ee5043141412e839945afe2f9';
 
 function App() {
-  const [hash, setHash] = useState([])
+  const [hash, setHash] = useState('')
   const [numberChart, setNumberChart] = useState(true)
   const [bet, setBet] = useState(500)
   const [saltV1, setSaltV1] = useState(DEFAULT_SALT)
@@ -22,10 +20,6 @@ function App() {
     setNumberChart(b);
     !numberChart&&setBet(num);
   }
-  useEffect(() => {
-
-
-  }, [numberChart,bet])
 
 
   let curHash = hash;
@@ -90,8 +84,6 @@ function App() {
     totals.push(total);
   });
 
-  console.log(total)
-
   // Tạo mảng màu cho biểu đồ
   let colors = [];
   for (let i = 0; i < totals.length; i++) {
@@ -108,11 +100,6 @@ function App() {
   }
 
   // Vẽ biểu đồ
-  let BetTruth=[]
-  for(let i=1;i<=20;i++){
-    BetTruth.push(270  + 300*i)
-  }
-  console.log('BetTruth',BetTruth);
   const data = {
     labels: [...Array(len).keys()],
     datasets: [
@@ -124,8 +111,6 @@ function App() {
       }
     ]
   };
-
-  console.log({hash})
 
   const options = {
     responsive: true,
